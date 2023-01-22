@@ -1,8 +1,7 @@
-type TaskStatus = 'todo' | 'pending' | 'done';
+type TaskStatus = 'todo' | 'done';
 
 export type Task = {
-  id: string;
+  readonly id: string;
   title: string;
   status: TaskStatus;
-  description?: string;
 };

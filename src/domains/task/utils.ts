@@ -8,3 +8,12 @@ export const createTaskObject = (task: Omit<Task, 'id' | 'status'>): Task => ({
   id: id(),
   status: 'todo',
 });
+
+export const updateSingleTaskObject = (editedTask: Task) => (task: Task) =>
+  editedTask.id === task.id ? { ...task, ...editedTask, id: task.id } : task;
+
+export const updateTaskObject = (editedTask: Task) => (tasks: Task[]) =>
+  tasks.map(updateSingleTaskObject(editedTask));
+
+export const filterByStatus = (status: Task['status']) => (task: Task) =>
+  status === task.status;
