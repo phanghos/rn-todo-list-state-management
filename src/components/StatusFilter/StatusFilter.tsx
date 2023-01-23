@@ -1,7 +1,8 @@
 import React from 'react';
-import { ViewProps } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
-import { Task } from '@app/domains/task/types';
+
+import type { ViewProps } from 'react-native';
+import type { Task } from '@app/domains/task/types';
 
 type StatusFilterProps = Pick<Task, 'status'> &
   Pick<ViewProps, 'style'> & {

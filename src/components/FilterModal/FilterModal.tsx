@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
-import type { Task } from '@app/domains/task/types';
+import { Button } from 'react-native-paper';
+
 import StatusFilter from '@components/StatusFilter/StatusFilter';
 import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
+
+import type { Task } from '@app/domains/task/types';
 
 type FilterModalProps = {
   isVisible: boolean;

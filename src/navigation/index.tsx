@@ -2,12 +2,15 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TaskListScreen from '@app/screens/TaskListScreen/TaskListScreen';
+
 import NewTaskScreen from '@app/screens/NewTaskScreen/NewTaskScreen';
+import TaskListScreen from '@app/screens/TaskListScreen/TaskListScreen';
 import FilterHeaderButton from '@components/FilterHeaderButton/FilterHeaderButton';
-import type { RootStackParamList } from './types';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Screens from './screens';
+
+import type { RootStackParamList } from './types';
 
 const AppStack = createNativeStackNavigator<RootStackParamList>();
 

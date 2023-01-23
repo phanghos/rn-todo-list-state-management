@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import type { RootStackScreenProps } from '@app/navigation/types';
+
 import { createTaskObject } from '@app/domains/task/utils';
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
 import StatusFilter from '@components/StatusFilter/StatusFilter';
-import { Task } from '@app/domains/task/types';
+import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+import type { Task } from '@app/domains/task/types';
+import type { RootStackScreenProps } from '@app/navigation/types';
 
 type ScreenProps = RootStackScreenProps<'NEW_TASK_SCREEN'>;
 

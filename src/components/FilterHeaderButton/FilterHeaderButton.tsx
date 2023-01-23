@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Button } from 'react-native-paper';
+
 import FilterModal from '@components/FilterModal/FilterModal';
 import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
 

@@ -1,10 +1,13 @@
 import React, { useRef } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import type { Task } from '@app/domains/task/types';
-import TaskView from '@components/TaskView/TaskView';
+
 import Screens from '@app/navigation/screens';
+import TaskView from '@components/TaskView/TaskView';
+import { useNavigation } from '@react-navigation/native';
+
 import EmptyList from './EmptyList';
+
+import type { Task } from '@app/domains/task/types';
 
 type TaskListProps = {
   tasks: Task[];

@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+
 import Screens from '@app/navigation/screens';
+import { useNavigation } from '@react-navigation/native';
 
 const EmptyList = () => {
   const { navigate } = useNavigation();
