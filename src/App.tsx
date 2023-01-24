@@ -5,24 +5,36 @@
  * @format
  */
 
+import 'react-native-gesture-handler';
+
 import React from 'react';
+import { StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
+
 import TaskListContextProvider from '@components/TaskListContextProvider/TaskListContextProvider';
+import { NavigationContainer } from '@react-navigation/native';
+
 import AppNavigator from './navigation';
 import theme from './theme';
 
 const App = () => (
-  <SafeAreaProvider>
-    <NavigationContainer>
-      <TaskListContextProvider>
-        <PaperProvider theme={theme}>
-          <AppNavigator />
-        </PaperProvider>
-      </TaskListContextProvider>
-    </NavigationContainer>
-  </SafeAreaProvider>
+  <GestureHandlerRootView style={styles.container}>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <TaskListContextProvider>
+          <PaperProvider theme={theme}>
+            <AppNavigator />
+          </PaperProvider>
+        </TaskListContextProvider>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  </GestureHandlerRootView>
 );
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+});
