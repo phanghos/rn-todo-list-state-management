@@ -1,19 +1,29 @@
 import React from 'react';
+
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
+import useTasksActions from '@app/domains/task/useTaskActions';
 import Screens from '@app/navigation/screens';
 import { useNavigation } from '@react-navigation/native';
 
-const EmptyList = () => {
-  const { navigate } = useNavigation();
+type EmptyListProps = {
+  message?: string;
+};
 
-  const goToNewTaskScreen = () => navigate(Screens.NewTask);
+const EmptyList = ({ message = 'No pending tasks' }: EmptyListProps) => {
+  const { navigate } = useNavigation();
+  const { changeFilter } = useTasksActions();
+
+  const resetFilterAndNavigate = () => {
+    changeFilter(undefined);
+    navigate(Screens.NewTask);
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.message}>No pending tasks</Text>
-      <Button onPress={goToNewTaskScreen}>Add Task</Button>
+      <Text style={styles.message}>{message}</Text>
+      <Button onPress={resetFilterAndNavigate}>Add Task</Button>
     </View>
   );
 };

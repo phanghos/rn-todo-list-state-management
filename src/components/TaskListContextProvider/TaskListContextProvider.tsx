@@ -3,11 +3,13 @@ import React, { createContext, useCallback, useMemo, useState } from 'react';
 import { Task } from '@app/domains/task/types';
 import { filterByStatus, updateTaskObject } from '@app/domains/task/utils';
 
+type TaskAction = (task: Task) => void;
+
 type TaskListContextParams = {
   tasks: Task[];
   filter: Task['status'] | undefined;
-  addTask: (task: Task) => void;
-  editTask: (task: Task) => void;
+  addTask: TaskAction;
+  editTask: TaskAction;
   changeFilter: (filter: Task['status'] | undefined) => void;
 };
 
