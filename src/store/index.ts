@@ -1,15 +1,28 @@
-import taskSlice from '@app/domains/task/slice';
-import { configureStore } from '@reduxjs/toolkit';
+import { create } from 'zustand';
 
-const store = configureStore({
-  reducer: {
-    tasks: taskSlice,
-  },
-});
+import { Task } from '@app/domains/task/types';
+import { filterByStatus, updateTaskObject } from '@app/domains/task/utils';
 
-export default store;
+type TaskAction = (task: Task) => void;
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+type StoreState = {
+  tasks: Task[];
+  filter: Task['status'] | undefined;
+  addTask: TaskAction;
+  editTask: TaskAction;
+  changeFilter: (filter: Task['status'] | undefined) => void;
+};
+
+const useStore = create<StoreState>(set => ({
+  tasks: [],
+  filter: undefined,
+  addTask: task => set(state => ({ ...state, tasks: [...state.tasks, task] })),
+  editTask: task =>
+    set(state => ({ ...state, tasks: updateTaskObject(task)(state.tasks) })),
+  changeFilter: filter => set(state => ({ ...state, filter })),
+}));
+
+export default useStore;
+
+export const selectFilteredTasks = ({ filter, tasks }: StoreState) =>
+  filter ? tasks.filter(filterByStatus(filter)) : tasks;

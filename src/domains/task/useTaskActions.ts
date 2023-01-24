@@ -1,5 +1,15 @@
-import { addTask, changeFilter, editTask } from './slice';
+import { shallow } from 'zustand/shallow';
 
-const useTasksActions = () => ({ addTask, editTask, changeFilter });
+import useStore from '@app/store';
+
+const useTasksActions = () =>
+  useStore(
+    ({ addTask, editTask, changeFilter }) => ({
+      addTask,
+      editTask,
+      changeFilter,
+    }),
+    shallow,
+  );
 
 export default useTasksActions;

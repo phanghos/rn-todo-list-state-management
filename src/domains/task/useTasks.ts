@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
+import useStore, { selectFilteredTasks } from '@app/store';
 
-import { selectFilteredTasks } from './selectors';
-
-const useTasks = () => useSelector(selectFilteredTasks);
+const useTasks = () => useStore(selectFilteredTasks);
 
 export default useTasks;

@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
+import useStore from '@app/store';
 
-import { selectFilter } from './selectors';
-
-const useFilter = () => useSelector(selectFilter);
+const useFilter = () => useStore(state => state.filter);
 
 export default useFilter;
