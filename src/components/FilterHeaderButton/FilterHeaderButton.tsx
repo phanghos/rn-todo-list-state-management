@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
 
+import useTasks from '@app/domains/task/useTasks';
 import FilterModal from '@components/FilterModal/FilterModal';
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
 
 const FilterHeaderButton = () => {
-  const { tasks } = useContext(TaskListContext);
+  const tasks = useTasks();
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
   const openModal = () => setIsFilterModalVisible(true);

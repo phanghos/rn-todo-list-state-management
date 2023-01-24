@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Button } from 'react-native-paper';
 
+import useTasksActions from '@app/domains/task/useTaskActions';
 import StatusFilter from '@components/StatusFilter/StatusFilter';
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
 
 import type { Task } from '@app/domains/task/types';
 
@@ -14,7 +14,7 @@ type FilterModalProps = {
 };
 
 const FilterModal = ({ isVisible, onClose }: FilterModalProps) => {
-  const { changeFilter } = useContext(TaskListContext);
+  const { changeFilter } = useTasksActions();
   const [status, setStatus] = useState<Task['status']>('todo');
 
   const performActionAndClose = (fn: () => void) => {

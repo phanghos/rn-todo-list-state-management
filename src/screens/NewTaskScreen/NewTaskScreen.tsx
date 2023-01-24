@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
+import useTasksActions from '@app/domains/task/useTaskActions';
 import { createTaskObject } from '@app/domains/task/utils';
 import StatusFilter from '@components/StatusFilter/StatusFilter';
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import type { Task } from '@app/domains/task/types';
@@ -16,7 +16,7 @@ const NewTaskScreen = () => {
   const { params: { task } = {} } = useRoute<ScreenProps['route']>();
   const [title, setTitle] = useState(task?.title ?? '');
   const [status, setStatus] = useState<Task['status']>(task?.status || 'todo');
-  const { addTask, editTask } = useContext(TaskListContext);
+  const { addTask, editTask } = useTasksActions();
   const { goBack } = useNavigation();
 
   const addTaskCallback = () => {

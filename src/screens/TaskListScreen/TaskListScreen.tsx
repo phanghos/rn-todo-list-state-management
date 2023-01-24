@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
+import useTasks from '@app/domains/task/useTasks';
 import TaskList from '@components/TaskList/TaskList';
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
 
 const TaskListScreen = () => {
-  const { tasks } = useContext(TaskListContext);
+  const tasks = useTasks();
 
   return <TaskList tasks={tasks} />;
 };
