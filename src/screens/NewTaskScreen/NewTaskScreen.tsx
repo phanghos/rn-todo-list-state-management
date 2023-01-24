@@ -20,7 +20,7 @@ const NewTaskScreen = () => {
   const { goBack } = useNavigation();
 
   const addTaskCallback = () => {
-    if (!!title) {
+    if (title.trim()) {
       task
         ? editTask({ ...task, title, status })
         : addTask(createTaskObject({ title }));
