@@ -7,7 +7,7 @@ const tasksState = (state: RootState) => state.tasks;
 
 const selectTasks = createSelector(tasksState, ({ tasks }) => tasks);
 
-const selectFilter = createSelector(tasksState, ({ filter }) => filter);
+export const selectFilter = createSelector(tasksState, ({ filter }) => filter);
 
 export const selectFilteredTasks = createSelector(
   selectTasks,

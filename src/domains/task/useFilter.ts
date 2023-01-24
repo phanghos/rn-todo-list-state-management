@@ -1,11 +1,7 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
+import { selectFilter } from './selectors';
 
-const useFilter = () => {
-  const { filter } = useContext(TaskListContext);
-
-  return filter;
-};
+const useFilter = () => useSelector(selectFilter);
 
 export default useFilter;
