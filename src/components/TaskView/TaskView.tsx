@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewProps,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import type { Task } from '@app/domains/task/types';
@@ -7,13 +13,13 @@ import type { Task } from '@app/domains/task/types';
 type TaskProps = {
   task: Task;
   onPress: (task: Task) => void;
-};
+} & Pick<ViewProps, 'style'>;
 
-const TaskView = ({ task, onPress }: TaskProps) => {
+const TaskView = ({ task, onPress, style }: TaskProps) => {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity onPress={() => onPress?.(task)}>
+    <TouchableOpacity onPress={() => onPress(task)} style={style}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{task.title}</Text>
         {task.status === 'done' && (

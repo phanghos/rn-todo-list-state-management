@@ -29,14 +29,14 @@ const NewTaskScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, padding: 16, backgroundColor: 'white' }}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={StyleSheet.absoluteFill}
         onPress={addTaskCallback}
       />
       <TextInput
         value={title}
-        placeholder="Type your task here..."
+        placeholder="I want to..."
         mode="outlined"
         onChangeText={setTitle}
         autoFocus
@@ -45,7 +45,7 @@ const NewTaskScreen = () => {
         <StatusFilter
           status={status}
           onValueChange={setStatus as (value: string) => void}
-          style={{ marginTop: 36 }}
+          style={styles.statusFilter}
         />
       )}
     </View>
@@ -53,3 +53,8 @@ const NewTaskScreen = () => {
 };
 
 export default NewTaskScreen;
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16, backgroundColor: 'white' },
+  statusFilter: { marginTop: 36 },
+});
