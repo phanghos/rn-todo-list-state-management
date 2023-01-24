@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+
+import { useSelector } from 'react-redux';
 
 import TaskList from '@components/TaskList/TaskList';
-import { TaskListContext } from '@components/TaskListContextProvider/TaskListContextProvider';
+import { selectFilteredTasks } from '@app/domains/task/selectors';
 
 const TaskListScreen = () => {
-  const { tasks } = useContext(TaskListContext);
+  const tasks = useSelector(selectFilteredTasks);
 
   return <TaskList tasks={tasks} />;
 };
