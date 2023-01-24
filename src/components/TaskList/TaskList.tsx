@@ -27,6 +27,7 @@ import type { Task } from '@app/domains/task/types';
 
 type TaskListProps = {
   tasks: Task[];
+  filter: Task['status'] | undefined;
 };
 
 const INITIAL_POS_Y_INPUT = -50;
@@ -37,7 +38,7 @@ const DELAY_RESET_POSITION = 500;
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-const TaskList = ({ tasks }: TaskListProps) => {
+const TaskList = ({ tasks, filter }: TaskListProps) => {
   const { navigate } = useNavigation();
   const panRef = useRef<PanGesture>();
   const scrollRef = useRef<NativeGesture>();
@@ -140,7 +141,9 @@ const TaskList = ({ tasks }: TaskListProps) => {
       </GestureDetector>
     </View>
   ) : (
-    <EmptyList />
+    <EmptyList
+      message={filter ? 'No matches for the filters applied' : undefined}
+    />
   );
 };
 
