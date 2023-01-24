@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { Button } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
-import { changeFilter } from '@app/domains/task/slice';
+import useTasksActions from '@app/domains/task/useTaskActions';
 import StatusFilter from '@components/StatusFilter/StatusFilter';
 
 import type { Task } from '@app/domains/task/types';
@@ -15,6 +15,7 @@ type FilterModalProps = {
 };
 
 const FilterModal = ({ isVisible, onClose }: FilterModalProps) => {
+  const { changeFilter } = useTasksActions();
   const [status, setStatus] = useState<Task['status']>('todo');
   const dispatch = useDispatch();
 

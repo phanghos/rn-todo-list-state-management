@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
-import { useSelector } from 'react-redux';
 
+import useTasks from '@app/domains/task/useTasks';
 import FilterModal from '@components/FilterModal/FilterModal';
-import { selectFilteredTasks } from '@app/domains/task/selectors';
 
 const FilterHeaderButton = () => {
-  const tasks = useSelector(selectFilteredTasks);
+  const tasks = useTasks();
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
 
   const openModal = () => setIsFilterModalVisible(true);

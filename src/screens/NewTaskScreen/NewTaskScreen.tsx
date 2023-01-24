@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
-import { addTask, editTask } from '@app/domains/task/slice';
+import useTasksActions from '@app/domains/task/useTaskActions';
 import { createTaskObject } from '@app/domains/task/utils';
 import StatusFilter from '@components/StatusFilter/StatusFilter';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -18,6 +18,7 @@ const NewTaskScreen = () => {
   const [title, setTitle] = useState(task?.title ?? '');
   const [status, setStatus] = useState<Task['status']>(task?.status || 'todo');
   const dispatch = useDispatch();
+  const { addTask, editTask } = useTasksActions();
   const { goBack } = useNavigation();
 
   const addTaskCallback = () => {
