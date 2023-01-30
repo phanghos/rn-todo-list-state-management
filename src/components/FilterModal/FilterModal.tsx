@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Button } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
 
 import useTasksActions from '@app/domains/task/useTaskActions';
 import StatusFilter from '@components/StatusFilter/StatusFilter';
@@ -17,7 +16,6 @@ type FilterModalProps = {
 const FilterModal = ({ isVisible, onClose }: FilterModalProps) => {
   const { changeFilter } = useTasksActions();
   const [status, setStatus] = useState<Task['status']>('todo');
-  const dispatch = useDispatch();
 
   const performActionAndClose = (fn: () => void) => {
     fn();
@@ -25,10 +23,10 @@ const FilterModal = ({ isVisible, onClose }: FilterModalProps) => {
   };
 
   const onApplyFilterPress = () =>
-    performActionAndClose(() => dispatch(changeFilter(status)));
+    performActionAndClose(() => changeFilter(status));
 
   const onResetPress = () =>
-    performActionAndClose(() => dispatch(changeFilter(undefined)));
+    performActionAndClose(() => changeFilter(undefined));
 
   return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
