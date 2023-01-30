@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
 
 import useTasksActions from '@app/domains/task/useTaskActions';
 import { createTaskObject } from '@app/domains/task/utils';
@@ -17,15 +16,14 @@ const NewTaskScreen = () => {
   const { params: { task } = {} } = useRoute<ScreenProps['route']>();
   const [title, setTitle] = useState(task?.title ?? '');
   const [status, setStatus] = useState<Task['status']>(task?.status || 'todo');
-  const dispatch = useDispatch();
   const { addTask, editTask } = useTasksActions();
   const { goBack } = useNavigation();
 
   const addTaskCallback = () => {
     if (title.trim()) {
       task
-        ? dispatch(editTask({ ...task, title, status }))
-        : dispatch(addTask(createTaskObject({ title })));
+        ? editTask({ ...task, title, status })
+        : addTask(createTaskObject({ title }));
     }
     goBack();
   };
