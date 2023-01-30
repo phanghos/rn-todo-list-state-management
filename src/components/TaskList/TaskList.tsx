@@ -1,11 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
-import {
-  Gesture,
-  GestureDetector,
-  NativeGesture,
-  PanGesture,
-} from 'react-native-gesture-handler';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   interpolate,
   runOnJS,
@@ -24,7 +19,6 @@ import { useNavigation } from '@react-navigation/native';
 import EmptyList from './EmptyList';
 
 import type { Task } from '@app/domains/task/types';
-
 type TaskListProps = {
   tasks: Task[];
   filter: Task['status'] | undefined;
@@ -40,8 +34,6 @@ const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const TaskList = ({ tasks, filter }: TaskListProps) => {
   const { navigate } = useNavigation();
-  const panRef = useRef<PanGesture>();
-  const scrollRef = useRef<NativeGesture>();
   const inputSv = useSharedValue(INITIAL_POS_Y_INPUT);
   const scrollSv = useSharedValue(0);
   const [isPanEnabled, setIsPanEnabled] = useState(true);
@@ -69,8 +61,6 @@ const TaskList = ({ tasks, filter }: TaskListProps) => {
       scrollSv.value = clampedValue;
     })
     .onFinalize(({ translationY }) => {
-      console.log(clamp(translationY, 0, -INITIAL_POS_Y_INPUT));
-
       if (translationY >= -INITIAL_POS_Y_INPUT) {
         runOnJS(navigate)(Screens.NewTask);
         inputSv.value = withDelay(
@@ -83,9 +73,14 @@ const TaskList = ({ tasks, filter }: TaskListProps) => {
         scrollSv.value = withTiming(INITIAL_POS_Y_SCROLL);
       }
     })
-    .simultaneousWithExternalGesture(scrollRef)
-    .withRef(panRef)
     .enabled(isPanEnabled);
+
+  const nativeGesture = Gesture.Native();
+
+  const composedGestures = Gesture.Simultaneous(
+    scrollPanGesture,
+    nativeGesture,
+  );
 
   const onScroll = useAnimatedScrollHandler({
     onBeginDrag({ contentOffset }) {
@@ -106,15 +101,6 @@ const TaskList = ({ tasks, filter }: TaskListProps) => {
   const scrollAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: clamp(scrollSv.value, 0, -INITIAL_POS_Y_INPUT) }],
   }));
-
-  const nativeGesture = Gesture.Native()
-    .simultaneousWithExternalGesture(panRef)
-    .withRef(scrollRef);
-
-  const composedGestures = Gesture.Simultaneous(
-    scrollPanGesture,
-    nativeGesture,
-  );
 
   return !!tasks.length ? (
     <View style={styles.container}>
