@@ -1,7 +1,7 @@
-import { useAtom } from 'jotai';
+import { useRecoilValue } from 'recoil';
 
 import { selectFilteredTasks } from './selectors';
 
-const useTasks = () => useAtom(selectFilteredTasks)[0];
+const useTasks = () => useRecoilValue(selectFilteredTasks);
 
 export default useTasks;

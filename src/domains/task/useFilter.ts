@@ -1,7 +1,7 @@
-import { useAtom } from 'jotai';
+import { useRecoilValue } from 'recoil';
 
 import { filterAtom } from '@app/domains/task/atoms';
 
-const useFilter = () => useAtom(filterAtom)[0];
+const useFilter = () => useRecoilValue(filterAtom);
 
 export default useFilter;
