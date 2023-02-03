@@ -7,12 +7,12 @@
 
 import 'react-native-gesture-handler';
 
+import { Provider as JotaiProvider } from 'jotai';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { RecoilRoot } from 'recoil';
 
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -23,11 +23,11 @@ const App = () => (
   <GestureHandlerRootView style={styles.container}>
     <SafeAreaProvider>
       <NavigationContainer>
-        <RecoilRoot>
+        <JotaiProvider>
           <PaperProvider theme={theme}>
             <AppNavigator />
           </PaperProvider>
-        </RecoilRoot>
+        </JotaiProvider>
       </NavigationContainer>
     </SafeAreaProvider>
   </GestureHandlerRootView>

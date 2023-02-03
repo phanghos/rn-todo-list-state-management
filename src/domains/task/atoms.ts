@@ -1,13 +1,7 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
 import { Task } from './types';
 
-export const tasksAtom = atom<Task[]>({
-  key: 'tasks',
-  default: [],
-});
+export const tasksAtom = atom<Task[]>([]);
 
-export const filterAtom = atom<Task['status'] | undefined>({
-  key: 'filter',
-  default: undefined,
-});
+export const filterAtom = atom<Task['status'] | undefined>(undefined);
