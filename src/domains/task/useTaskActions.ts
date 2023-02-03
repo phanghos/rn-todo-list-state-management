@@ -1,10 +1,30 @@
-import useWithDispatch from '@app/hooks/useWithDispatch';
+import { useCallback } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { addTask, changeFilter, editTask } from './slice';
+import { filterAtom } from './atoms';
+import { selectFilteredTasks } from './selectors';
+import { Task } from './types';
+import { updateTaskObject } from './utils';
 
-const useTasksActions = () => ({
-  addTask: useWithDispatch(addTask),
-  editTask: useWithDispatch(editTask),
-  changeFilter: useWithDispatch(changeFilter),
-});
+const useTasksActions = () => {
+  const [tasks, setTasks] = useRecoilState(selectFilteredTasks);
+  const changeFilter = useSetRecoilState(filterAtom);
+
+  const addTask = useCallback(
+    (task: Task) => setTasks([...tasks, task]),
+    [tasks, setTasks],
+  );
+
+  const editTask = useCallback(
+    (task: Task) => setTasks(updateTaskObject(task)(tasks)),
+    [tasks, setTasks],
+  );
+
+  return {
+    addTask,
+    editTask,
+    changeFilter,
+  };
+};
+
 export default useTasksActions;

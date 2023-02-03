@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useRecoilValue } from 'recoil';
 
-import { selectFilter } from './selectors';
+import { filterAtom } from '@app/domains/task/atoms';
 
-const useFilter = () => useSelector(selectFilter);
+const useFilter = () => useRecoilValue(filterAtom);
 
 export default useFilter;

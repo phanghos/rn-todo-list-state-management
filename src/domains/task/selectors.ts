@@ -1,16 +1,21 @@
-import { RootState } from '@app/store';
-import { createSelector } from '@reduxjs/toolkit';
+import { DefaultValue, selector } from 'recoil';
 
+import { filterAtom, tasksAtom } from './atoms';
+import { Task } from './types';
 import { filterByStatus } from './utils';
 
-const tasksState = (state: RootState) => state.tasks;
+const isRecoilDefaultValue = (atom: unknown): atom is DefaultValue =>
+  atom instanceof DefaultValue;
 
-const selectTasks = createSelector(tasksState, ({ tasks }) => tasks);
-
-export const selectFilter = createSelector(tasksState, ({ filter }) => filter);
-
-export const selectFilteredTasks = createSelector(
-  selectTasks,
-  selectFilter,
-  (tasks, filter) => (filter ? tasks.filter(filterByStatus(filter)) : tasks),
-);
+export const selectFilteredTasks = selector<Task[]>({
+  key: 'filteredTasksSelector',
+  get: ({ get }) => {
+    const filter = get(filterAtom);
+    const list = get(tasksAtom);
+    return filter ? list.filter(filterByStatus(filter)) : list;
+  },
+  set: ({ set }, tasks) => {
+    if (isRecoilDefaultValue(tasks)) return;
+    set(tasksAtom, tasks);
+  },
+});

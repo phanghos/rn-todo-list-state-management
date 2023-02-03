@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useRecoilValue } from 'recoil';
 
 import { selectFilteredTasks } from './selectors';
 
-const useTasks = () => useSelector(selectFilteredTasks);
+const useTasks = () => useRecoilValue(selectFilteredTasks);
 
 export default useTasks;
